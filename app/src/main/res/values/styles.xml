@@ -1,0 +1,5 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Button.dark_50" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">@color/dark_50</item>
+    </style>
+</resources>

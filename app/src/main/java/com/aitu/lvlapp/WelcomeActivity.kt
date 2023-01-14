@@ -25,12 +25,12 @@ class WelcomeActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
         checkUser()
 
-        binding.signUpBtn.setOnClickListener{
+        binding.btnSignUp.setOnClickListener{
             startActivity(Intent(this, RegisterActivity::class.java))
         }
 
         // Login
-        binding.signInBtn.setOnClickListener{
+        binding.btnLogin.setOnClickListener{
             startActivity(Intent(this, LoginActivity::class.java))
         }
 

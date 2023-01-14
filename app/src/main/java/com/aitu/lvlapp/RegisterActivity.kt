@@ -82,8 +82,6 @@ class RegisterActivity : AppCompatActivity() {
                 val firebaseUser = firebaseAuth.currentUser
                 val email = firebaseUser!!.email
 
-                val user = User(firebaseUser!!.uid, username, email, "None", "1", "None", "")
-
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }

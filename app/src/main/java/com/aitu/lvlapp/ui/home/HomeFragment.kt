@@ -9,12 +9,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.aitu.lvlapp.R
 import com.aitu.lvlapp.WelcomeActivity
 import com.aitu.lvlapp.databinding.FragmentHomeBinding
+import com.aitu.lvlapp.ui.todo.TodoFragment
 import com.google.firebase.auth.FirebaseAuth
+import androidx.navigation.findNavController
+
 
 class HomeFragment : Fragment() {
 
@@ -61,6 +66,14 @@ class HomeFragment : Fragment() {
                 checkUser()
             })
         }
+
+        val todoBtn = root.findViewById(R.id.btn_todo) as Button?
+        if(todoBtn != null){
+            todoBtn.setOnClickListener(View.OnClickListener {
+                binding.root.findNavController().navigate(R.id.nav_todo)
+            })
+        }
+
 
         return root
     }
