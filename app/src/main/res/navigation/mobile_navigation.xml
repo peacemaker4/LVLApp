@@ -27,6 +27,25 @@
         android:id="@+id/nav_actions"
         android:name="com.bek.lvlapp.ui.actions.ActionsFragment"
         android:label="@string/menu_actions"
-        tools:layout="@layout/fragment_actions" />
+        tools:layout="@layout/fragment_actions" >
+        <action
+            android:id="@+id/action_nav_actions_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.bek.lvlapp.SettingsFragment"
+        android:label="Settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_nav_actions"
+            app:destination="@id/nav_actions"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+    </fragment>
 
 </navigation>

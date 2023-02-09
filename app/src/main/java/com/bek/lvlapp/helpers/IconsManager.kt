@@ -36,6 +36,12 @@ class IconsManager {
             Icon(R.drawable.ic_icon_savings, "Savings"),
             Icon(R.drawable.ic_icon_gamepad, "Gamepad"),
             Icon(R.drawable.ic_icon_sport_ball, "Sport"),
+            Icon(R.drawable.ic_icon_finish_flag, "Flag"),
+            Icon(R.drawable.ic_icon_car, "Car"),
+            Icon(R.drawable.ic_icon_bike, "Bike"),
+            Icon(R.drawable.ic_icon_water, "Moist"),
+            Icon(R.drawable.ic_icon_shutter_speed, "Shutter"),
+            Icon(R.drawable.ic_icon_recycle, "Recycle"),
         )
 
         fun GetAllIcons(): ArrayList<Icon> {

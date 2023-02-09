@@ -1,20 +1,23 @@
 package com.bek.lvlapp
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bek.lvlapp.databinding.ActivityMainBinding
+import com.bek.lvlapp.helpers.AuthManager
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 
@@ -54,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+
 //        val firebaseUser = FirebaseAuth.getInstance().currentUser
 //        if(firebaseUser != null){
 //            val email = firebaseUser.email.toString();
@@ -63,11 +67,12 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        }
 
-        firebaseAuth = FirebaseAuth.getInstance()
-        val firebaseUser = firebaseAuth.currentUser
-        checkUser()
+        val firebaseUser = AuthManager().firebaseUser
+        AuthManager().checkUser(this)
+        email = AuthManager().getUserEmail()
 
         val navigationView = findViewById<View>(R.id.nav_view) as NavigationView
+        navigationView.background = resources.getDrawable(R.color.dark_bg)
         val headerView: View = navigationView.getHeaderView(0)
         headerView.findViewById<TextView>(R.id.text_user_email).text = email
 
@@ -84,14 +89,12 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    private fun checkUser() {
-        //check if user logged in
-        val firebaseUser = firebaseAuth.currentUser
-        if(firebaseUser != null){
-            email = firebaseUser.email.toString();
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        if (id == R.id.action_settings) {
+            findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.settingsFragment)
+            return true
         }
-        else{
-            startActivity(Intent(this, LoginActivity::class.java))
-        }
+        return super.onOptionsItemSelected(item)
     }
 }

@@ -1,38 +1,34 @@
 package com.bek.lvlapp.ui.home
 
-import android.R.attr.label
-import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.transition.Slide
-import android.transition.Transition
-import android.transition.TransitionManager
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.preference.PreferenceManager
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.bek.lvlapp.R
-import com.bek.lvlapp.WelcomeActivity
 import com.bek.lvlapp.databinding.FragmentHomeBinding
+import com.bek.lvlapp.helpers.AuthManager
 import com.bek.lvlapp.models.Quote
+import com.daimajia.slider.library.Animations.DescriptionAnimation
+import com.daimajia.slider.library.SliderLayout
+import com.daimajia.slider.library.SliderTypes.BaseSliderView
+import com.daimajia.slider.library.SliderTypes.TextSliderView
 import com.github.johnpersano.supertoasts.library.Style
 import com.github.johnpersano.supertoasts.library.SuperActivityToast
 import com.github.johnpersano.supertoasts.library.utils.PaletteUtils
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -50,13 +46,11 @@ class HomeFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
 
-    private lateinit var firebaseAuth: FirebaseAuth
+    private var authManager = AuthManager()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
-    private var email = ""
 
     private lateinit var quote_1: Quote
     private lateinit var quote_1_textView: TextView
@@ -77,15 +71,19 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        firebaseAuth = FirebaseAuth.getInstance()
-        val firebaseUser = firebaseAuth.currentUser
+        val firebaseUser = authManager.firebaseUser
         if (firebaseUser != null) {
             database = Firebase.database(url).reference
         }
 
         quote_1_textView = binding.quote1
 
-        binding.progressBar.start()
+        if(quote_1_textView.text.isNotEmpty()){
+            binding.progressBar.stop()
+            binding.progressBar.visibility = View.GONE
+        }
+        else
+            binding.progressBar.start()
 
         quote_1 = Quote()
 
@@ -93,6 +91,9 @@ class HomeFragment : Fragment() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 if(quote_1.last_updated == null){
+                    val sharedPref = PreferenceManager.getDefaultSharedPreferences(requireContext()) ?: return
+                    val quote_update_time = sharedPref.getString(getString(R.string.pref_quote_update), resources.getString(R.string.def_quote_update))
+
                     for (quoteSnapshot in dataSnapshot.children) {
                         var quote = quoteSnapshot.getValue<Quote>()!!
                         quote_1 = Quote(quote.author, quote.quote, quote.last_updated)
@@ -100,7 +101,8 @@ class HomeFragment : Fragment() {
                     if(_binding != null) {
                         if(quote_1.last_updated != null){
                             var last_upd = LocalDateTime.parse(quote_1.last_updated)
-                            if(last_upd.isAfter(LocalDateTime.now().minusHours(1))){
+                            if(last_upd.isAfter(LocalDateTime.now().minusMinutes(quote_update_time!!.toLong()))){
+                                binding.progressBar.stop()
                                 binding.progressBar.visibility = View.GONE
                                 quote_1_textView.text = "\"" + quote_1.quote + "\" - " + quote_1.author
                                 binding.timeText.text = last_upd.format(DateTimeFormatter.ofPattern("HH:mm"))
@@ -123,8 +125,6 @@ class HomeFragment : Fragment() {
             }
         }
         database.child(path).child(firebaseUser!!.uid).addValueEventListener(quoteListener)
-
-
             quote_1_textView.setOnLongClickListener {
                 if(quote_1_textView.text.isNotEmpty()){
 
@@ -149,10 +149,70 @@ class HomeFragment : Fragment() {
                 return@setOnLongClickListener false
             }
 
-        binding.logoutBtn.setOnClickListener{
-            firebaseAuth.signOut()
-            checkUser()
+        binding.refreshLayout.setColorSchemeColors(resources.getColor(R.color.main))
+
+        binding.refreshLayout.setOnRefreshListener {
+            if(!binding.progressBar.isStart){
+                quote_1_textView.text = ""
+                binding.timeText.text = ""
+                binding.progressBar.visibility = View.VISIBLE
+                binding.progressBar.start()
+                if(quote_1.last_updated != null){
+                    var last_upd = LocalDateTime.parse(quote_1.last_updated)
+
+                    val sharedPref = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                    val quote_update_time = sharedPref.getString(getString(R.string.pref_quote_update), resources.getString(R.string.def_quote_update))
+
+                    if(last_upd.isAfter(LocalDateTime.now().minusMinutes(quote_update_time!!.toLong()))){
+                        binding.progressBar.stop()
+                        binding.progressBar.visibility = View.GONE
+                        quote_1_textView.text = "\"" + quote_1.quote + "\" - " + quote_1.author
+                        binding.timeText.text = last_upd.format(DateTimeFormatter.ofPattern("HH:mm"))
+
+                        binding.timeText.visibility = View.VISIBLE
+                        binding.refreshLayout.isRefreshing = false
+                    }
+                    else{
+                        getQuote()
+                    }
+                }
+            }
+            else{
+                binding.refreshLayout.isRefreshing = false
+
+            }
         }
+
+        var imageSlider = binding.sliderLayout
+
+        var sliderImages = HashMap<String, Int>()
+        sliderImages.put("The Parthenon", R.drawable.bg_parthenon)
+        sliderImages.put("The Great Wave", R.drawable.bg_great_wave)
+        sliderImages.put("The Starry Night", R.drawable.bg_the_starry_night)
+        sliderImages.put("The School of Athens", R.drawable.bg_school_of_athens)
+        sliderImages.put("Nighthawks", R.drawable.bg_nighthawks)
+        sliderImages.put("Insomniac", R.drawable.bg_insomniac)
+
+        for (name in sliderImages.keys) {
+            val textSliderView = TextSliderView(binding.root.context)
+            // initialize a SliderLayout
+            sliderImages.get(name)?.let {
+                textSliderView
+                    .description(name)
+                    .image(it)
+                    .setScaleType(BaseSliderView.ScaleType.CenterCrop)
+            }
+
+            //add your extra information
+            textSliderView.bundle(Bundle())
+            textSliderView.bundle
+                .putString("extra", name)
+            imageSlider.addSlider(textSliderView)
+        }
+        imageSlider.setPresetTransformer(SliderLayout.Transformer.DepthPage)
+        imageSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom)
+        imageSlider.setCustomAnimation(DescriptionAnimation())
+        imageSlider.setDuration(10000)
 
         return root
     }
@@ -169,16 +229,19 @@ class HomeFragment : Fragment() {
                     quote_1 = Quote(author, quote, LocalDateTime.now().toString())
 
                     var last_upd = LocalDateTime.now()
+                    quote_1.last_updated = last_upd.toString()
 
                     if(_binding != null){
+                        binding.progressBar.stop()
                         binding.progressBar.visibility = View.GONE
+                        binding.refreshLayout.isRefreshing = false
                         binding.timeText.visibility = View.VISIBLE
                         quote_1_textView.text = "\"" + quote_1.quote + "\" - " + quote_1.author
                         binding.timeText.text = last_upd.format(DateTimeFormatter.ofPattern("HH:mm"))
 
                         binding.timeText.visibility = View.VISIBLE
 
-                        val firebaseUser = firebaseAuth.currentUser
+                        val firebaseUser = authManager.firebaseUser
                         database.child(path).child(firebaseUser!!.uid).removeValue()
                         database.child(path).child(firebaseUser!!.uid).push().setValue(quote_1).addOnSuccessListener { e->
                         }.addOnFailureListener{ e->
@@ -198,17 +261,8 @@ class HomeFragment : Fragment() {
             })
     }
 
-    private fun checkUser() {
-        //check if user logged in
-        val firebaseUser = firebaseAuth.currentUser
-        if(firebaseUser != null){
-            email = firebaseUser.email.toString();
-        }
-        else{
-            binding.root.context.startActivity(Intent(binding.root.context, WelcomeActivity::class.java))
-            val activity = context as Activity?
-            activity!!.finish()
-        }
+    override fun onResume() {
+        super.onResume()
     }
 
     override fun onDestroyView() {

@@ -19,6 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.25"
+        tools:listitem="@layout/skill_item"
         />
 
     <com.victor.loading.rotate.RotateLoading
@@ -27,7 +28,7 @@
         android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:loading_color="@color/red"
+        app:loading_color="@color/main"
         app:loading_width="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -45,7 +46,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.98"
-        android:backgroundTint="@color/red"
+        android:backgroundTint="@color/main"
         android:visibility="gone"
         app:borderWidth="0dp"
         app:srcCompat="@drawable/ic_icon_check"

@@ -1,0 +1,78 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="@string/general_header">
+
+        <ColorPickerPreference
+            android:defaultValue="@color/main"
+            android:dialogTitle="@string/color_picker_default_title"
+            android:key="@string/pref_color"
+            android:summary="Pick a color"
+            android:title="Primary color"
+            app:pref_size="small" />
+
+        <TimePickerPreference
+            android:key="@string/pref_time"
+            android:summary="Pick a time"
+            android:title="@string/time_picker_title"
+            app:pref_hourFormat="h24"
+            app:pref_pickerTime="08:00"
+            app:pref_summaryHasTime="Selected time: %s" />
+
+        <ListPreference
+            android:key="@string/pref_quote_update"
+            app:useSimpleSummaryProvider="true"
+            android:dialogTitle="Select update time"
+            app:title="Quote update time"
+            android:defaultValue="@string/def_quote_update"
+            android:entries="@array/quote_update_entries"
+            android:entryValues="@array/quote_update_values"
+            >
+
+        </ListPreference>
+
+
+        <EditTextPreference
+            app:key="@string/pref_web_page"
+            app:title="@string/web_title"
+            app:useSimpleSummaryProvider="true"
+            android:defaultValue="@string/def_web_page"
+            />
+
+    </PreferenceCategory>
+
+
+
+<!--    <PreferenceCategory app:title="@string/preferences_header">-->
+
+<!--        <SwitchPreferenceCompat-->
+<!--            app:key="sync"-->
+<!--            app:title="@string/sync_title" />-->
+
+<!--        <SwitchPreferenceCompat-->
+<!--            app:dependency="sync"-->
+<!--            app:key="attachment"-->
+<!--            app:summaryOff="@string/attachment_summary_off"-->
+<!--            app:summaryOn="@string/attachment_summary_on"-->
+<!--            app:title="@string/attachment_title" />-->
+
+
+<!--    </PreferenceCategory>-->
+
+    <PreferenceCategory app:title="@string/account_header">
+
+        <EditTextPreference
+            app:key="signature"
+            app:title="@string/signature_title"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <Preference
+        app:title="Log out"
+        app:key="@string/logout"
+        app:layout="@layout/logout_btn"
+        app:allowDividerAbove="true"
+        />
+
+</PreferenceScreen>

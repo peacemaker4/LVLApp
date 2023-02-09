@@ -23,6 +23,7 @@ import com.bek.lvlapp.LoginActivity
 import com.bek.lvlapp.R
 import com.bek.lvlapp.adapters.PagerAdapter
 import com.bek.lvlapp.databinding.FragmentTodoTabsBinding
+import com.bek.lvlapp.helpers.AuthManager
 import com.bek.lvlapp.models.Todo
 import com.bek.lvlapp.ui.todo.TodoFragment
 import com.google.android.material.tabs.TabLayout
@@ -52,7 +53,7 @@ class TodoTabsFragment : Fragment() {
     private lateinit var editTodoTitle: EditText
     private lateinit var btnSave: Button
 
-    private lateinit var firebaseAuth: FirebaseAuth
+    val authManager = AuthManager()
 
     //Firebase db
     lateinit var database: DatabaseReference
@@ -74,9 +75,8 @@ class TodoTabsFragment : Fragment() {
         _binding = FragmentTodoTabsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        firebaseAuth = FirebaseAuth.getInstance()
-        checkUser()
-        val firebaseUser = firebaseAuth.currentUser
+        authManager.checkUser(binding.root.context)
+        val firebaseUser = authManager.firebaseUser
         if (firebaseUser != null) {
             database = Firebase.database(url).reference
         }
@@ -117,6 +117,7 @@ class TodoTabsFragment : Fragment() {
         dialog.show()
         val window: Window? = dialog.window
         if (window != null) {
+            window.attributes.windowAnimations = R.style.SlideDialogAnimation
             window.setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT)
 
             if(editTodoTitle.requestFocus()) {
@@ -140,7 +141,7 @@ class TodoTabsFragment : Fragment() {
     }
 
     private fun AddTodo(){
-        val firebaseUser = firebaseAuth.currentUser
+        val firebaseUser = authManager.firebaseUser
 
             val new_todo = Todo(new_task, false, false, null)
             new_todo.created_at = LocalDateTime.now().toString()
@@ -153,19 +154,6 @@ class TodoTabsFragment : Fragment() {
                 Toast.makeText(binding.root.context, "Error while adding the note: $e", Toast.LENGTH_SHORT).show()
             }
 
-    }
-
-    private fun checkUser() {
-        //check if user logged in
-        val firebaseUser = firebaseAuth.currentUser
-        if(firebaseUser != null){
-            email = firebaseUser.email.toString();
-        }
-        else{
-            binding.root.context.startActivity(Intent(binding.root.context, LoginActivity::class.java))
-            val activity = context as Activity?
-            activity!!.finish()
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {

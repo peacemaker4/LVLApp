@@ -69,7 +69,7 @@ class ActionsFragment : Fragment() {
         R.id.action_add ->{
             val intent = Intent(requireActivity(), ActionsAddActivity::class.java)
             startActivity(intent)
-            requireActivity().overridePendingTransition(R.transition.slide_up, R.transition.no_animation)
+            requireActivity().overridePendingTransition(R.anim.slide_up, R.anim.no_animation)
             true
         }
         else -> {

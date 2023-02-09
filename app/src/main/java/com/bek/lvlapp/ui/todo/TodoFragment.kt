@@ -18,6 +18,7 @@ import com.bek.lvlapp.R
 import com.bek.lvlapp.adapters.SwipeGesture
 import com.bek.lvlapp.adapters.TodoAdapter
 import com.bek.lvlapp.databinding.FragmentTodoBinding
+import com.bek.lvlapp.helpers.AuthManager
 import com.bek.lvlapp.models.Todo
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
@@ -39,7 +40,7 @@ class TodoFragment(var list_type: String = "All") : Fragment() {
 
     private val binding get() = _binding!!
 
-    private lateinit var firebaseAuth: FirebaseAuth
+    val authManager = AuthManager()
 
     //Firebase db
     lateinit var database: DatabaseReference
@@ -68,9 +69,7 @@ class TodoFragment(var list_type: String = "All") : Fragment() {
 
         setHasOptionsMenu(true)
 
-        firebaseAuth = FirebaseAuth.getInstance()
-
-        val firebaseUser = firebaseAuth.currentUser
+        val firebaseUser = authManager.firebaseUser
         if (firebaseUser != null) {
             database = Firebase.database(url).reference
         }

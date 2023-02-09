@@ -51,6 +51,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
     implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
     implementation 'androidx.databinding:baseLibrary:3.2.0-alpha11'
+    implementation 'androidx.preference:preference:1.2.0'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
@@ -91,4 +92,18 @@ dependencies {
 
     //Slider
     implementation 'com.xw.repo:bubbleseekbar:3.20'
+
+    //Gson
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    //Settings preference
+    //https://github.com/takisoft/preferencex-android
+    implementation 'com.takisoft.preferencex:preferencex:1.1.0'
+    implementation 'com.takisoft.preferencex:preferencex-datetimepicker:1.1.0'
+    implementation 'com.takisoft.preferencex:preferencex-colorpicker:1.1.0'
+
+    //ImageSlider
+    implementation 'com.squareup.picasso:picasso:2.3.2'
+    implementation 'com.nineoldandroids:library:2.4.0'
+    implementation 'com.daimajia.slider:library:1.1.5@aar'
 }

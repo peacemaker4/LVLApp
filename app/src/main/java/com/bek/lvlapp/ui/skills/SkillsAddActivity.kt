@@ -1,19 +1,12 @@
 package com.bek.lvlapp.ui.skills
 
 import android.app.AlertDialog
-import android.content.Intent
-import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.TextUtils
-import android.transition.Fade
-import android.transition.Transition
-import android.transition.TransitionManager
-import android.view.View
 import android.view.Window
-import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Button
@@ -25,17 +18,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.bek.lvlapp.LoginActivity
 import com.bek.lvlapp.R
 import com.bek.lvlapp.adapters.IconAdapter
 import com.bek.lvlapp.databinding.ActivitySkillsAddBinding
+import com.bek.lvlapp.helpers.AuthManager
 import com.bek.lvlapp.helpers.IconsManager
 import com.bek.lvlapp.models.Icon
 import com.bek.lvlapp.models.Skill
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
 import com.madrapps.pikolo.HSLColorPicker
 import com.madrapps.pikolo.listeners.SimpleColorSelectionListener
 import com.ramijemli.percentagechartview.PercentageChartView
@@ -47,7 +40,7 @@ class SkillsAddActivity : AppCompatActivity() {
     //View binding
     private lateinit var binding: ActivitySkillsAddBinding
 
-    private lateinit var firebaseAuth: FirebaseAuth
+    val authManager = AuthManager()
 
     //Firebase db
     lateinit var database: DatabaseReference
@@ -71,9 +64,12 @@ class SkillsAddActivity : AppCompatActivity() {
     private lateinit var editSkill: EditText
     private lateinit var progressBar: PercentageChartView
 
-    private var new_skill_text = ""
+    private var edit_skill_text = ""
+    private var skill_uid: String = ""
 
     private lateinit var iconList: ArrayList<Icon>
+
+    private var currentSkill: Skill? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,26 +77,46 @@ class SkillsAddActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         actionBar = supportActionBar!!
-        actionBar.title = "Skills Add"
-        actionBar.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.red)))
+
+        editSkill = findViewById(R.id.edit_skill)
+        progressBar = findViewById(R.id.progress_bar)
+
+        iconList = IconsManager.GetAllIcons()
+        currIcon = resources.getResourceEntryName(iconList?.get(0)?.icon!!)
+        imageIcon = findViewById(R.id.imageSkill)
+        var imageView: ImageView = findViewById(R.id.imageSkill)
+        var colorPicker: HSLColorPicker = findViewById(R.id.colorPicker);
+
+        val extras = intent.extras
+        if(extras != null){
+            actionBar.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.dark_bg)))
+
+            currentSkill = Gson().fromJson(extras.getString("skill"), Skill::class.java)
+
+            edit_skill_text = currentSkill!!.name.toString()
+            actionBar.title = "Skill: " + edit_skill_text + "*"
+            currColor = currentSkill!!.color!!
+            currIcon = currentSkill!!.icon!!
+            imageIcon?.setBackgroundResource(resources.getIdentifier(currIcon, "drawable", "com.bek.lvlapp"))
+            imageIcon.background.setColorFilter(currColor, PorterDuff.Mode.MULTIPLY)
+            editSkill.setText(edit_skill_text)
+            progressBar.progressColor = currColor
+            colorPicker.setColor(currColor)
+        }
+        else{
+            actionBar.title = "Skills Add"
+            actionBar.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.main)))
+        }
+
         actionBar.setDisplayHomeAsUpEnabled(true)
         actionBar.setDisplayShowHomeEnabled(true)
 
-        firebaseAuth = FirebaseAuth.getInstance()
-        checkUser()
-        val firebaseUser = firebaseAuth.currentUser
+        authManager.checkUser(this)
+        val firebaseUser = authManager.firebaseUser
         if (firebaseUser != null) {
             database = Firebase.database(url).reference
         }
 
-        var colorPicker: HSLColorPicker = findViewById(R.id.colorPicker);
-        iconList = IconsManager.GetAllIcons()
-
-        currIcon = resources.getResourceEntryName(iconList?.get(0)?.icon!!)
-
-        imageIcon = findViewById(R.id.imageSkill)
-        progressBar = findViewById(R.id.progress_bar)
-        var imageView: ImageView = findViewById(R.id.imageSkill)
 
         progressBar.setProgress(0f, false)
         progressBar.setProgress(100f, true)
@@ -123,7 +139,6 @@ class SkillsAddActivity : AppCompatActivity() {
             iconPicker()
         }
 
-        editSkill = findViewById(R.id.edit_skill)
 
 //        if(editSkill.requestFocus()) {
 //            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
@@ -141,7 +156,7 @@ class SkillsAddActivity : AppCompatActivity() {
 
     private fun iconPicker(){
         dialogBuilder = AlertDialog.Builder(binding.root.context)
-        var popupView = layoutInflater.inflate(R.layout.icon_picker_popup, null)
+        var popupView = layoutInflater.inflate(R.layout.list_picker_popup, null)
         dialogBuilder.setView(popupView)
 
         recyclerView = popupView.findViewById(R.id.list_icons)
@@ -169,14 +184,15 @@ class SkillsAddActivity : AppCompatActivity() {
         dialog.show()
         val window: Window? = dialog.window
         if (window != null) {
+            window.attributes.windowAnimations = R.style.ScaleDialogAnimation
             window.setLayout(android.app.ActionBar.LayoutParams.MATCH_PARENT, android.app.ActionBar.LayoutParams.WRAP_CONTENT)
         }
     }
 
     private fun validateData(){
-        new_skill_text = editSkill.text.toString().trim()
+        edit_skill_text = editSkill.text.toString().trim()
 
-        if(TextUtils.isEmpty(new_skill_text)){
+        if(TextUtils.isEmpty(edit_skill_text)){
         }
         else{
             AddSkill()
@@ -184,37 +200,51 @@ class SkillsAddActivity : AppCompatActivity() {
     }
 
     private fun AddSkill(){
-        val firebaseUser = firebaseAuth.currentUser
+        val firebaseUser = authManager.firebaseUser
+        if(currentSkill == null){
+            database.child(path).child(firebaseUser!!.uid).get().addOnSuccessListener {
+                val new_skill = Skill(edit_skill_text, currIcon, currColor)
 
-        database.child(path).child(firebaseUser!!.uid).get().addOnSuccessListener {
-            val new_skill = Skill(new_skill_text, currIcon, currColor)
-            new_skill.pos = it.childrenCount.toInt()
-            new_skill.created_at = LocalDateTime.now().toString()
-            new_skill.updated_at = LocalDateTime.now().toString()
+                new_skill.pos = it.childrenCount.toInt()
+                new_skill.created_at = LocalDateTime.now().toString()
+                new_skill.updated_at = LocalDateTime.now().toString()
 
-            database.child(path).child(firebaseUser!!.uid).push().setValue(new_skill).addOnSuccessListener { e->
-                onBackPressed()
-                overridePendingTransition(R.transition.no_animation, R.transition.slide_down);
-            }.addOnFailureListener{ e->
-                Toast.makeText(binding.root.context, "Error while adding the skill: $e", Toast.LENGTH_LONG).show()
+                database.child(path).child(firebaseUser!!.uid).push().setValue(new_skill).addOnSuccessListener { e->
+                    onBackPressed()
+                }.addOnFailureListener{ e->
+                    Toast.makeText(binding.root.context, "Error while adding the skill: $e", Toast.LENGTH_LONG).show()
+                }
             }
         }
+        else{
+            val upd_skill = currentSkill
+            upd_skill?.updated_at = LocalDateTime.now().toString()
+            upd_skill?.name = edit_skill_text
+            upd_skill?.color = currColor
+            upd_skill?.icon = currIcon
 
+            database.child(path).child(firebaseUser!!.uid).child(upd_skill?.uid!!).setValue(upd_skill).addOnSuccessListener { e->
+                onBackPressed()
+            }.addOnFailureListener{ e->
+                Toast.makeText(binding.root.context, "Error while saving the skill: $e", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val extras = intent.extras
+        if(extras != null){
+            overridePendingTransition(R.anim.no_animation, R.anim.fade_out);
+        }
+        else{
+            overridePendingTransition(R.anim.no_animation, R.anim.slide_down);
+        }
+    }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
-        overridePendingTransition(R.transition.no_animation, R.transition.slide_down);
-        return super.onSupportNavigateUp()
-    }
 
-    private fun checkUser() {
-        //if user is already logged in go to main activity
-        val firebaseUser = firebaseAuth.currentUser
-        if(firebaseUser == null){
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
+        return super.onSupportNavigateUp()
     }
 }

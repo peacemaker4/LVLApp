@@ -1,19 +1,14 @@
 package com.bek.lvlapp.ui.skills
 
+import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.transition.ChangeBounds
-import android.transition.Explode
 import android.transition.Fade
 import android.transition.Slide
 import android.transition.Transition
 import android.transition.TransitionManager
 import android.view.*
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import android.view.animation.OvershootInterpolator
-import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -25,12 +20,11 @@ import com.bek.lvlapp.R
 import com.bek.lvlapp.adapters.DragGesture
 import com.bek.lvlapp.adapters.SkillAdapter
 import com.bek.lvlapp.databinding.FragmentSkillsBinding
+import com.bek.lvlapp.helpers.AuthManager
 import com.bek.lvlapp.models.Skill
-import com.bek.lvlapp.models.Todo
 import com.github.johnpersano.supertoasts.library.Style
 import com.github.johnpersano.supertoasts.library.SuperActivityToast
 import com.github.johnpersano.supertoasts.library.utils.PaletteUtils
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -46,7 +40,7 @@ class SkillsFragment : Fragment() {
     private lateinit var skillsViewModel: SkillsViewModel
     private var _binding: FragmentSkillsBinding? = null
 
-    private lateinit var firebaseAuth: FirebaseAuth
+    val authManager = AuthManager()
 
     //Firebase db
     lateinit var database: DatabaseReference
@@ -81,12 +75,10 @@ class SkillsFragment : Fragment() {
         _binding = FragmentSkillsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        firebaseAuth = FirebaseAuth.getInstance()
-        val firebaseUser = firebaseAuth.currentUser
+        val firebaseUser = authManager.firebaseUser
         if (firebaseUser != null) {
             database = Firebase.database(url).reference
         }
-
 
         recyclerView = binding.listSkill
         recyclerView!!.setLayoutManager(LinearLayoutManager(binding.root.context))
@@ -150,7 +142,7 @@ class SkillsFragment : Fragment() {
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                         intent.putExtra("skill_uid", skill.uid)
                         context!!.startActivity(intent)
-                        requireActivity().overridePendingTransition(R.transition.fade_in, R.transition.fade_out)
+                        requireActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                     }
                 }
             }
@@ -203,9 +195,10 @@ class SkillsFragment : Fragment() {
         R.id.action_add ->{
             val intent = Intent(requireActivity(), SkillsAddActivity::class.java)
             startActivity(intent)
-            requireActivity().overridePendingTransition(R.transition.slide_up, R.transition.no_animation)
+            requireActivity().overridePendingTransition(R.anim.slide_up, R.anim.no_animation)
             true
         }
+
         R.id.action_order->{
             if(binding.btnSave.visibility == View.GONE){
                 list_reordered = false

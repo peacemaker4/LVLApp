@@ -10,11 +10,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LVLApp">
+        android:theme="@style/Theme.LVLApp"
+        >
         <activity
             android:name="com.bek.lvlapp.WelcomeActivity"
             android:exported="true"
-            android:theme="@style/Theme.LVLApp.NoActionBar">
+            android:theme="@style/Theme.LVLApp.NoActionBar"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,39 +28,44 @@
             android:name="com.bek.lvlapp.LoginActivity"
             android:exported="true"
             android:parentActivityName="com.bek.lvlapp.WelcomeActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             />
         <activity
             android:name="com.bek.lvlapp.RegisterActivity"
             android:exported="true"
             android:parentActivityName="com.bek.lvlapp.WelcomeActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             >
         </activity>
         <activity
             android:name="com.bek.lvlapp.ui.skills.SkillsAddActivity"
             android:exported="true"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             >
         </activity>
         <activity
-            android:name=".NewsActivity"
-            android:exported="true"
-            />
-        <activity
-            android:name=".WebActivity"
-            android:exported="true"
-            />
-        <activity
             android:name=".ui.skills.SkillActivity"
             android:exported="true"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             />
         <activity
             android:name=".ui.actions.ActionsAddActivity"
             android:exported="true"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             />
         <activity
             android:name="com.bek.lvlapp.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.LVLApp.NoActionBar">
+            android:theme="@style/Theme.LVLApp.NoActionBar"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            >
         </activity>
 
         <meta-data

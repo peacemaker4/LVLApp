@@ -9,10 +9,33 @@
     <string name="action_add">Add</string>
     <string name="action_order">Order</string>
     <string name="action_archive">Archive</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_delete">Delete</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_todo">To-do</string>
     <string name="menu_skills">Skills</string>
     <string name="menu_actions">Actions</string>
     <string name="menu_api">Api</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="general_header">General</string>
+    <string name="account_header">Account</string>
+
+    <!-- Message Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+<!--    Preferences Preferences-->
+    <string name="web_title">Web page url</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="logout">Log out</string>
+    <string name="time_picker_title">Start of a new day</string>
+    <string name="menu_web">Web</string>
 </resources>

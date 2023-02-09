@@ -75,7 +75,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textSize="12sp"
-        android:textColor="@color/red"
+        android:textColor="@color/main"
         />
     <TextView
         android:id="@+id/publish_time"
