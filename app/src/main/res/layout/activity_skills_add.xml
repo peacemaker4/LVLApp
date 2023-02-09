@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/skill_add_layout">
+
+
+    <com.madrapps.pikolo.HSLColorPicker
+        android:id="@+id/colorPicker"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="0dp"
+        app:arc_length="110"
+        app:hue_start_angle="30"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lightness_indicator_stroke_width="0dp"
+        app:lightness_start_angle="270"
+        app:radius_offset="20dp"
+        app:saturation_indicator_stroke_color="@color/red"
+        app:saturation_start_angle="150"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1" />
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imageBg"-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="200dp"-->
+<!--        android:background="@drawable/bg_circle_outline"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/colorPicker" />-->
+
+    <com.ramijemli.percentagechartview.PercentageChartView
+        android:id="@+id/progress_bar"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:outlineAmbientShadowColor="@color/white"
+        android:outlineSpotShadowColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:pcv_animDuration="1250"
+        app:pcv_animInterpolator="accelerate_decelerate"
+        app:pcv_mode="ring"
+        app:pcv_orientation="clockwise"
+        app:pcv_progress="0"
+        app:pcv_progressColor="@color/white"
+        app:pcv_startAngle="90"
+        app:pcv_textColor="@color/white"
+        app:pcv_textSize="0sp"
+        app:pcv_textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageBgDark"
+        android:layout_width="190dp"
+        android:layout_height="190dp"
+        android:background="@drawable/bg_circle"
+        android:backgroundTint="@color/dark_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/colorPicker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/colorPicker" />
+
+    <ImageView
+        android:id="@+id/imageSkill"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:background="@drawable/ic_icon_etc"
+        app:layout_constraintBottom_toBottomOf="@+id/colorPicker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/colorPicker" />
+
+    <EditText
+        android:id="@+id/edit_skill"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Enter name"
+        android:inputType="text"
+        android:maxLines="1"
+        android:textAlignment="center"
+        android:fontFamily="@font/montserrat"
+        android:textSize="20sp"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.161" />
+
+    <TextView
+        android:id="@+id/textView_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Skill"
+        android:background="@color/dark_bg"
+        android:fontFamily="@font/montserrat"
+        android:textSize="15sp"
+        android:textColor="@color/red"
+        app:layout_constraintBottom_toTopOf="@+id/edit_skill"
+        app:layout_constraintEnd_toEndOf="@+id/edit_skill"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/edit_skill"
+        app:layout_constraintTop_toTopOf="@+id/edit_skill"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/rounded_pill"
+        android:drawableRight="@drawable/ic_icon_check"
+        android:text="Save"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progress_bar"
+        app:layout_constraintVertical_bias="0.804" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

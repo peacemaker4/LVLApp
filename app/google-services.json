@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "917292570356",
-    "project_id": "lvlapp-3a0e2",
-    "storage_bucket": "lvlapp-3a0e2.appspot.com"
+    "project_number": "137328097474",
+    "project_id": "lvlapp-ff610",
+    "storage_bucket": "lvlapp-ff610.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:917292570356:android:75b8b641b78cdf674a30a1",
+        "mobilesdk_app_id": "1:137328097474:android:9e26049244f4c37ebaa35b",
         "android_client_info": {
-          "package_name": "com.aitu.lvlapp"
+          "package_name": "com.bek.lvlapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "917292570356-3k7501lg6isrqe1ocrn8k5jmqvvats93.apps.googleusercontent.com",
+          "client_id": "137328097474-mu3q4ti31cog9v8gksiv37bq4fa6pl74.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDoBh3166AGyVR-As2d7SmCltD4_WMXM6s"
+          "current_key": "AIzaSyA3x2N1goJLsfxj3PqQk2E9mqSCDp4zBEw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "917292570356-3k7501lg6isrqe1ocrn8k5jmqvvats93.apps.googleusercontent.com",
+              "client_id": "137328097474-mu3q4ti31cog9v8gksiv37bq4fa6pl74.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

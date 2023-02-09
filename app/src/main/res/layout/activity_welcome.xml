@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark"
-    tools:context=".WelcomeActivity">
+    tools:context=".WelcomeActivity"
+    android:background="@color/dark_bg">
 
     <Button
         android:id="@+id/btn_google"
@@ -14,7 +14,7 @@
         android:gravity="center"
         android:background="@drawable/rounded_pill"
         android:drawableLeft="@drawable/googleg_standard_color_18"
-        android:fontFamily="@font/montserrat"
+        android:fontFamily="@font/montserrat_bold"
         android:text="Google"
         android:textAllCaps="false"
         android:textColor="@color/white"
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_pill"
         android:drawableLeft="@drawable/ic_menu_plus"
-        android:fontFamily="@font/montserrat"
+        android:fontFamily="@font/montserrat_bold"
         android:gravity="center"
         android:text="Sign up with email"
         android:textAllCaps="false"
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_pill"
         android:drawableLeft="@drawable/ic_menu_mail"
-        android:fontFamily="@font/montserrat"
+        android:fontFamily="@font/montserrat_bold"
         android:gravity="center"
         android:text="Log in with email"
         android:textAllCaps="false"

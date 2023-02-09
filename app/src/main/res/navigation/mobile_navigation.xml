@@ -3,18 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_home"
+    >
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.aitu.lvlapp.ui.home.HomeFragment"
+        android:name="com.bek.lvlapp.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_todo"
-        android:name="com.aitu.lvlapp.ui.todo.TodoFragment"
+        android:name="com.bek.lvlapp.ui.todotabs.TodoTabsFragment"
         android:label="@string/menu_todo"
-        tools:layout="@layout/fragment_todo" />
+        tools:layout="@layout/fragment_todo_tabs" />
+    <fragment
+        android:id="@+id/nav_skills"
+        android:name="com.bek.lvlapp.ui.skills.SkillsFragment"
+        android:label="@string/menu_skills"
+        tools:layout="@layout/fragment_skills" />
+
+    <fragment
+        android:id="@+id/nav_actions"
+        android:name="com.bek.lvlapp.ui.actions.ActionsFragment"
+        android:label="@string/menu_actions"
+        tools:layout="@layout/fragment_actions" />
 
 </navigation>

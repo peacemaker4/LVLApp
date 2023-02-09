@@ -2,55 +2,92 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <TextView
-        android:id="@+id/text_home"
+    <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.156" />
+        app:layout_constraintVertical_bias="0.0"
+        android:background="@drawable/side_nav_bar" />
 
-
-    <Button
-        android:id="@+id/btn_todo"
-        android:layout_width="250dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/quote_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_pill"
-        android:drawableRight="@drawable/ic_menu_task"
-        android:fontFamily="@font/montserrat"
-        android:gravity="center"
-        android:text="TO-DO"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:cornerRadius="5dp"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_corner"
+        android:backgroundTint="@color/dark_red"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_home"
-        app:layout_constraintVertical_bias="0.69" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.050000012"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/quote1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_light"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:paddingRight="15dp"
+                android:text=""
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/timeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="178dp"
+                android:fontFamily="@font/montserrat_light"
+                android:paddingRight="7dp"
+                android:paddingBottom="5dp"
+                android:text=""
+                android:layout_gravity="end"
+                android:textColor="#A3A3A3"
+                android:textSize="12sp"
+                 />
+        </LinearLayout>
+
+        <com.victor.loading.newton.NewtonCradleLoading
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="@+id/quote_layout"
+            app:layout_constraintEnd_toEndOf="@+id/quote_layout"
+            app:layout_constraintStart_toStartOf="@+id/quote_layout"
+            app:layout_constraintTop_toTopOf="@+id/quote_layout"
+            app:layout_constraintVertical_bias="0.5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/logout_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Logout"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/white"
+        android:background="@drawable/rounded_pill"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

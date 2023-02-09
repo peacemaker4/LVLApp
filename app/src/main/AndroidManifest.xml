@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.aitu.lvlapp">
+    package="com.bek.lvlapp">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -10,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LVLApp">
         <activity
-            android:name=".WelcomeActivity"
+            android:name="com.bek.lvlapp.WelcomeActivity"
             android:exported="true"
             android:theme="@style/Theme.LVLApp.NoActionBar">
             <intent-filter>
@@ -20,18 +22,39 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name="com.bek.lvlapp.LoginActivity"
             android:exported="true"
-            android:parentActivityName=".WelcomeActivity"
+            android:parentActivityName="com.bek.lvlapp.WelcomeActivity"
             />
         <activity
-            android:name=".RegisterActivity"
+            android:name="com.bek.lvlapp.RegisterActivity"
             android:exported="true"
-            android:parentActivityName=".WelcomeActivity"
+            android:parentActivityName="com.bek.lvlapp.WelcomeActivity"
             >
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.bek.lvlapp.ui.skills.SkillsAddActivity"
+            android:exported="true"
+            >
+        </activity>
+        <activity
+            android:name=".NewsActivity"
+            android:exported="true"
+            />
+        <activity
+            android:name=".WebActivity"
+            android:exported="true"
+            />
+        <activity
+            android:name=".ui.skills.SkillActivity"
+            android:exported="true"
+            />
+        <activity
+            android:name=".ui.actions.ActionsAddActivity"
+            android:exported="true"
+            />
+        <activity
+            android:name="com.bek.lvlapp.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.LVLApp.NoActionBar">

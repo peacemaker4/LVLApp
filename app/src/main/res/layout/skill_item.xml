@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/skill_layout"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:gravity="center"
+    android:background="@drawable/rounded_corner"
+    android:foreground="@drawable/custom_ripple"
+    android:backgroundTint="@color/dark"
+    android:layout_marginTop="5dp"
+    >
+    <ImageView
+        android:id="@+id/icon_id"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/ic_icon_rocket"
+        android:layout_gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/name_id"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_light"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingRight="3dp"
+        android:paddingBottom="5dp"
+        android:text="Skill"
+        android:textAlignment="textStart"
+        android:textSize="16sp" />
+    <TextView
+        android:id="@+id/level_id"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/dotgothic16"
+        android:paddingLeft="5dp"
+        android:paddingRight="3dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:text="1"
+        android:textAlignment="textStart"
+        android:textSize="16sp" />
+
+    <ProgressBar
+        android:id="@+id/progress_id"
+        android:layout_width="100dp"
+        android:layout_height="7dp"
+        android:paddingLeft="15dp"
+        android:layout_gravity="center"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:progressDrawable="@drawable/progress_bar_rounded"
+        android:progress="50"
+        />
+
+    <TextView
+        android:id="@+id/xp_id"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/montserrat_light"
+        android:paddingLeft="7dp"
+        android:text="100 XP"
+        android:textSize="11sp" />
+
+
+</LinearLayout>

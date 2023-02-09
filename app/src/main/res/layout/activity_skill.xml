@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/skill_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_bg">
+
+    <com.ramijemli.percentagechartview.PercentageChartView
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:outlineAmbientShadowColor="@color/red"
+        android:outlineSpotShadowColor="@color/red"
+        app:pcv_animDuration="800"
+        app:pcv_animInterpolator="accelerate_decelerate"
+        app:pcv_mode="ring"
+        app:pcv_orientation="clockwise"
+        app:pcv_progress="0"
+        app:pcv_progressColor="@color/red"
+        app:pcv_startAngle="90"
+        app:pcv_textColor="@color/red"
+        app:pcv_textSize="36sp"
+        app:pcv_textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/skill_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_icon_bar_chart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/progressBar"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/progressBar"
+        app:layout_constraintTop_toTopOf="@+id/progressBar"
+        app:layout_constraintVertical_bias="0.326"
+        />
+
+    <TextView
+        android:id="@+id/skill_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Skill"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="@color/red"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.418" />
+
+    <TextView
+        android:id="@+id/skill_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LEVEL 1"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="@color/red"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.138" />
+
+    <TextView
+        android:id="@+id/skill_xp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 XP"
+        android:fontFamily="@font/montserrat"
+        android:textColor="#B5B5B5"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.585" />
+
+    <ImageView
+        android:id="@+id/img_line"
+        android:layout_width="45dp"
+        android:layout_height="2dp"
+        android:background="@drawable/progress_bar_rounded"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/progressBar"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/progressBar"
+        app:layout_constraintTop_toTopOf="@+id/progressBar"
+        app:layout_constraintVertical_bias="0.646"
+        />
+    <ImageView
+        android:id="@+id/img_line2"
+        android:layout_width="35dp"
+        android:layout_height="2dp"
+        android:background="@drawable/progress_bar_rounded"
+        android:backgroundTint="#303030"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/progressBar"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/progressBar"
+        app:layout_constraintTop_toTopOf="@+id/progressBar"
+        app:layout_constraintVertical_bias="0.676"
+        />
+
+    <ImageView
+        android:id="@+id/img_line3"
+        android:layout_width="25dp"
+        android:layout_height="2dp"
+        android:background="@drawable/progress_bar_rounded"
+        android:backgroundTint="#7A252525"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/progressBar"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/progressBar"
+        app:layout_constraintTop_toTopOf="@+id/progressBar"
+        app:layout_constraintVertical_bias="0.706"
+        />
+
+    <TextView
+        android:id="@+id/skill_xp_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="83 XP LEFT"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.838" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

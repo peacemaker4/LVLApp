@@ -8,8 +8,8 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.aitu.lvlapp"
-        minSdk 21
+        applicationId "com.bek.lvlapp"
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -50,6 +50,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
     implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
+    implementation 'androidx.databinding:baseLibrary:3.2.0-alpha11'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
@@ -57,4 +58,37 @@ dependencies {
 
     //swipeGesture
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.4'
+
+    //colorpicker
+    implementation 'com.github.madrapps:pikolo:2.0.2'
+
+    // Moshi
+    implementation 'com.squareup.moshi:moshi-kotlin:1.13.0'
+
+    // Retrofit with Moshi Converter
+    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+
+    // Coil
+    implementation "io.coil-kt:coil:1.1.1"
+
+    implementation 'com.amitshekhar.android:android-networking:1.0.2'
+    implementation 'com.amitshekhar.android:jackson-android-networking:1.0.2'
+
+    //Progress bar lib
+    implementation 'com.victor:lib:1.0.4'
+
+    //Custom toast notify
+    implementation 'com.github.johnpersano:supertoasts:2.0'
+
+    //Custom progressbar
+    implementation 'com.ramijemli.percentagechartview:percentagechartview:0.3.1'
+
+    //Swipe Refresh
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    //Button animation
+    implementation "com.github.jd-alexander:LikeButton:0.2.3"
+
+    //Slider
+    implementation 'com.xw.repo:bubbleseekbar:3.20'
 }
