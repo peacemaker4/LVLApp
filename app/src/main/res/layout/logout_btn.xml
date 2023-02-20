@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/skill_layout"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp"
+    >
+    <ImageView
+        android:id="@+id/icon_id"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/ic_icon_logout"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/main"
+        />
+
+    <TextView
+        android:id="@+id/name_id"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text="Log out"
+        android:textSize="16sp"
+        android:textColor="@color/main"
+        />
+
+</LinearLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+    <string name="pref_time">08:00</string>
+    <string name="pref_color">#FF3C3C</string>
+    <string name="pref_quote_update">1 hour</string>
+    <string name="pref_web_page">webpage</string>
+</resources>
