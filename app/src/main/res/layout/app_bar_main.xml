@@ -15,11 +15,25 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/dark_prime"
             app:popupTheme="@style/Theme.LVLApp.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_main" />
+
+    <me.ibrahimsn.lib.SmoothBottomBar
+        android:id="@+id/bottomBar"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_gravity="bottom"
+        app:backgroundColor="@color/dark_prime"
+        app:iconTint="@color/light_gray"
+        app:iconTintActive="@color/red"
+        app:itemFontFamily="@font/montserrat_light"
+        app:textColor="@color/light_gray"
+        app:indicatorColor="@color/dark_50"
+        app:iconSize="20dp"
+        app:menu="@menu/menu"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

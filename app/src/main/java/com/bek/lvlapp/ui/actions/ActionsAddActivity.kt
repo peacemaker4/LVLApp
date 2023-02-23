@@ -91,7 +91,7 @@ class ActionsAddActivity : AppCompatActivity() {
 
         actionBar = supportActionBar!!
         actionBar.title = "Actions Add"
-        actionBar.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.main)))
+        actionBar.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.dark_prime)))
         actionBar.setDisplayHomeAsUpEnabled(true)
         actionBar.setDisplayShowHomeEnabled(true)
 

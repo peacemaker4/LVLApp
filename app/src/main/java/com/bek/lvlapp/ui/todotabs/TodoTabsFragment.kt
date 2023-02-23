@@ -6,6 +6,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.transition.Fade
 import android.transition.Slide
 import android.transition.Transition
 import android.transition.TransitionManager
@@ -18,6 +19,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.bek.lvlapp.LoginActivity
 import com.bek.lvlapp.R
@@ -75,12 +77,14 @@ class TodoTabsFragment : Fragment() {
         _binding = FragmentTodoTabsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        requireActivity().title = "Todos"
+        findNavController().enableOnBackPressed(true)
+
         authManager.checkUser(binding.root.context)
         val firebaseUser = authManager.firebaseUser
         if (firebaseUser != null) {
             database = Firebase.database(url).reference
         }
-
 
         val pageAdapter =  PagerAdapter(childFragmentManager)
         pageAdapter.addFragment(TodoFragment(), "All")
@@ -99,6 +103,13 @@ class TodoTabsFragment : Fragment() {
         var btn_anim: Animation = AnimationUtils.loadAnimation(binding.root.context, R.anim.bounce)
         btnAdd.setOnClickListener{
             btnAdd.startAnimation(btn_anim)
+
+            val transition: Transition = Fade()
+            transition.setDuration(250)
+            transition.addTarget(binding.btnAddtodo)
+            TransitionManager.beginDelayedTransition(binding.todoTabsLayout, transition)
+            btnAdd.visibility = View.GONE
+
             createNewTodo()
         }
 

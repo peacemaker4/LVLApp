@@ -125,7 +125,7 @@ class SkillActivity(bcontext: Context? = null) : AppCompatActivity() {
                         binding.skillXpLeft.setTextColor(skill.color!!)
 
                         val transition: Transition = Fade()
-                        transition.setDuration(1000)
+                        transition.setDuration(750)
                         transition.addTarget(binding.skillIcon)
                         transition.addTarget(binding.skillName)
                         transition.addTarget(binding.skillLevel)

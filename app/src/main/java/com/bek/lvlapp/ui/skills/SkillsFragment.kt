@@ -9,6 +9,7 @@ import android.transition.Slide
 import android.transition.Transition
 import android.transition.TransitionManager
 import android.view.*
+import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -75,6 +76,8 @@ class SkillsFragment : Fragment() {
         _binding = FragmentSkillsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        requireActivity().title = "Skills"
+
         val firebaseUser = authManager.firebaseUser
         if (firebaseUser != null) {
             database = Firebase.database(url).reference
@@ -130,8 +133,6 @@ class SkillsFragment : Fragment() {
                                 skillAdapter!!.notifyItemMoved(from_pos, to_pos)
                             list_reordered = true
 
-
-
                             return false
                         }
                     }
@@ -164,7 +165,6 @@ class SkillsFragment : Fragment() {
                     }
                 }
             }
-
 
             val transition: Transition = Fade()
             transition.setDuration(250)

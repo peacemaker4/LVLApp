@@ -17,6 +17,8 @@
     <string name="menu_skills">Skills</string>
     <string name="menu_actions">Actions</string>
     <string name="menu_api">Api</string>
+    <string name="menu_profile">Profile</string>
+
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="general_header">General</string>
@@ -37,5 +39,4 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="logout">Log out</string>
     <string name="time_picker_title">Start of a new day</string>
-    <string name="menu_web">Web</string>
 </resources>

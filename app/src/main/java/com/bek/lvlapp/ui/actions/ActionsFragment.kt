@@ -37,6 +37,8 @@ class ActionsFragment : Fragment() {
         _binding = FragmentActionsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        requireActivity().title = "Actions"
+
         setHasOptionsMenu(true)
 
 //        firebaseAuth = FirebaseAuth.getInstance()

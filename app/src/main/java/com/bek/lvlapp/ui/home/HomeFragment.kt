@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
@@ -70,6 +71,8 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        requireActivity().title = "Home"
 
         val firebaseUser = authManager.firebaseUser
         if (firebaseUser != null) {
@@ -139,7 +142,7 @@ class HomeFragment : Fragment() {
                         .setFrame(Style.FRAME_KITKAT)
                         .setColor(PaletteUtils.getSolidColor(PaletteUtils.DARK_GREY))
                         .setIconResource(R.drawable.ic_icon_copy)
-                        .setHeight(87)
+                        .setHeight(86)
                         .setAnimations(Style.ANIMATIONS_SCALE)
 
                     toast.show()
@@ -213,6 +216,10 @@ class HomeFragment : Fragment() {
         imageSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom)
         imageSlider.setCustomAnimation(DescriptionAnimation())
         imageSlider.setDuration(10000)
+
+        binding.todoTab.setOnClickListener {
+            findNavController().navigate(R.id.action_nav_home_to_nav_todo)
+        }
 
         return root
     }

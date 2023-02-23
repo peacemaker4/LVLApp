@@ -10,18 +10,36 @@
         android:id="@+id/nav_home"
         android:name="com.bek.lvlapp.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_todo"
+            app:destination="@id/nav_todo" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_skills"
+            app:destination="@id/nav_skills" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_todo"
         android:name="com.bek.lvlapp.ui.todotabs.TodoTabsFragment"
         android:label="@string/menu_todo"
-        tools:layout="@layout/fragment_todo_tabs" />
+        tools:layout="@layout/fragment_todo_tabs" >
+        <action
+            android:id="@+id/action_nav_todo_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
     <fragment
         android:id="@+id/nav_skills"
         android:name="com.bek.lvlapp.ui.skills.SkillsFragment"
         android:label="@string/menu_skills"
-        tools:layout="@layout/fragment_skills" />
+        tools:layout="@layout/fragment_skills" >
+        <action
+            android:id="@+id/action_nav_skills_to_nav_actions"
+            app:destination="@id/nav_actions" />
+        <action
+            android:id="@+id/action_nav_skills_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_actions"
@@ -29,23 +47,25 @@
         android:label="@string/menu_actions"
         tools:layout="@layout/fragment_actions" >
         <action
-            android:id="@+id/action_nav_actions_to_settingsFragment"
-            app:destination="@id/settingsFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right" />
+            android:id="@+id/action_nav_actions_to_profileFragment"
+            app:destination="@id/nav_profile" />
+        <action
+            android:id="@+id/action_nav_actions_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.bek.lvlapp.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_nav_profile_to_nav_home"
+            app:destination="@id/nav_home" />
     </fragment>
 
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.bek.lvlapp.SettingsFragment"
-        android:label="Settings" >
-        <action
-            android:id="@+id/action_settingsFragment_to_nav_actions"
-            app:destination="@id/nav_actions"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
-    </fragment>
+<!--        <fragment-->
+<!--        android:id="@+id/settingsFragment"-->
+<!--        android:name="com.bek.lvlapp.SettingsFragment"-->
+<!--        android:label="Settings" />-->
 
 </navigation>

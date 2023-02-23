@@ -105,7 +105,7 @@ class SkillsAddActivity : AppCompatActivity() {
         }
         else{
             actionBar.title = "Skills Add"
-            actionBar.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.main)))
+            actionBar.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.dark_prime)))
         }
 
         actionBar.setDisplayHomeAsUpEnabled(true)
