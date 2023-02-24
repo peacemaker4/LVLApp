@@ -6,8 +6,6 @@ With this app, you can add your skills and track your progress as you level up. 
 
 In addition to the gamification aspect, this app also includes a convenient to-do list function, allowing you to easily manage your daily tasks and goals. Whether you're looking to improve your productivity, learn a new skill, or simply enjoy a more interactive approach to personal development, this app is the perfect tool for you.
 
-With its intuitive interface and user-friendly design, my mobile application is the ideal solution for anyone looking to make positive changes in their life.
-
 ## Functionality
 
 - Todo - add your tasks, complete theme, delete
