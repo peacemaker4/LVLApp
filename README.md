@@ -1,6 +1,12 @@
 # LVLApp
 
-LVLApp - Android Mobile Application designed to gamify your life
+LVLApp - Android Mobile Application designed to gamify your life!
+
+With this app, you can add your skills and track your progress as you level up. You can also add actions that contribute XP to your skills, making the process of self-improvement more engaging and fun.
+
+In addition to the gamification aspect, this app also includes a convenient to-do list function, allowing you to easily manage your daily tasks and goals. Whether you're looking to improve your productivity, learn a new skill, or simply enjoy a more interactive approach to personal development, this app is the perfect tool for you.
+
+With its intuitive interface and user-friendly design, my mobile application is the ideal solution for anyone looking to make positive changes in their life.
 
 ## Functionality
 
