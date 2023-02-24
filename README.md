@@ -5,8 +5,8 @@ LVLApp - Android Mobile Application designed to gamify your life
 ## Functionality
 
 - Todo - add your tasks, complete theme, delete
-- Skills - add any skill
-- Actions - 
+- Skills - add any skill, edit, delete
+- Actions - add action items and level up your skills
 
 ## Tech Stack 
 - Android Studio - Main platform
