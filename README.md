@@ -2,6 +2,12 @@
 
 LVLApp - Android Mobile Application designed to gamify your life
 
+## Functionality
+
+- Todo - add your tasks, complete theme, delete
+- Skills - add any skill
+- Actions - 
+
 ## Tech Stack 
 - Android Studio - Main platform
 - Firebase - Users authorization and database
@@ -11,7 +17,7 @@ LVLApp - Android Mobile Application designed to gamify your life
 - [Android documentation](https://developer.android.com/docs)
 - [Firebase documentation](https://firebase.google.com/docs/database/android/start)
 
-## Libraries used
+## Libraries
 
 - [Swipe gestures](https://github.com/xabaras/RecyclerViewSwipeDecorator)
 - [Color picker](https://github.com/Madrapps/Pikolo)
