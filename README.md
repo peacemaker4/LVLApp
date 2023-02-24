@@ -9,7 +9,7 @@ LVLApp - Android Mobile Application designed to gamify your life
 - Actions - add action items and level up your skills
 
 ## Tech Stack 
-- Android Studio - Main platform
+- Android Studio
 - Firebase - Users authorization and database
 
 ## Resources
