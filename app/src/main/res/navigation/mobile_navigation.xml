@@ -15,8 +15,8 @@
             android:id="@+id/action_nav_home_to_nav_todo"
             app:destination="@id/nav_todo" />
         <action
-            android:id="@+id/action_nav_home_to_nav_skills"
-            app:destination="@id/nav_skills" />
+            android:id="@+id/action_nav_home_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
 
     <fragment
@@ -25,8 +25,8 @@
         android:label="@string/menu_todo"
         tools:layout="@layout/fragment_todo_tabs" >
         <action
-            android:id="@+id/action_nav_todo_to_nav_home"
-            app:destination="@id/nav_home" />
+            android:id="@+id/action_nav_todo_to_nav_skills"
+            app:destination="@id/nav_skills" />
     </fragment>
     <fragment
         android:id="@+id/nav_skills"
@@ -36,36 +36,21 @@
         <action
             android:id="@+id/action_nav_skills_to_nav_actions"
             app:destination="@id/nav_actions" />
-        <action
-            android:id="@+id/action_nav_skills_to_nav_home"
-            app:destination="@id/nav_home" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_actions"
         android:name="com.bek.lvlapp.ui.actions.ActionsFragment"
         android:label="@string/menu_actions"
-        tools:layout="@layout/fragment_actions" >
-        <action
-            android:id="@+id/action_nav_actions_to_profileFragment"
-            app:destination="@id/nav_profile" />
-        <action
-            android:id="@+id/action_nav_actions_to_nav_home"
-            app:destination="@id/nav_home" />
-    </fragment>
-    <fragment
-        android:id="@+id/nav_profile"
-        android:name="com.bek.lvlapp.ui.profile.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
-        <action
-            android:id="@+id/action_nav_profile_to_nav_home"
-            app:destination="@id/nav_home" />
-    </fragment>
+        tools:layout="@layout/fragment_actions" />
 
-<!--        <fragment-->
-<!--        android:id="@+id/settingsFragment"-->
-<!--        android:name="com.bek.lvlapp.SettingsFragment"-->
-<!--        android:label="Settings" />-->
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.bek.lvlapp.SettingsFragment"
+        android:label="Settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 
 </navigation>

@@ -28,21 +28,20 @@
 
     <ImageView
         android:id="@+id/imageBg"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/bg_circle_outline"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/bg_square"
         app:layout_constraintBottom_toTopOf="@+id/edit_action_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/colorPicker" />
 
 
-
     <ImageView
         android:id="@+id/imageBgDark"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:background="@drawable/bg_circle"
+        android:layout_width="77dp"
+        android:layout_height="77dp"
+        android:background="@color/dark_bg"
         android:backgroundTint="@color/dark_bg"
         app:layout_constraintBottom_toTopOf="@+id/edit_action_name"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +64,8 @@
         android:layout_height="50dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:background="@drawable/rounded_pill_transparent_bg_red_stroke"
+        android:background="@drawable/rounded_corner"
+        android:backgroundTint="@color/dark"
         android:hint="Enter name"
         android:inputType="text"
         android:maxLines="1"
@@ -81,7 +81,8 @@
         android:id="@+id/textView_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/dark_bg"
+        android:background="@drawable/rounded_corner_small"
+        android:backgroundTint="@color/dark"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:text="Action"
@@ -100,7 +101,8 @@
         android:layout_height="50dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:background="@drawable/rounded_pill_transparent_bg_red_stroke"
+        android:background="@drawable/rounded_corner"
+        android:backgroundTint="@color/dark"
         android:hint="Enter what it's about"
         android:inputType="text"
         android:maxLines="2"
@@ -110,13 +112,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.52" />
 
     <TextView
         android:id="@+id/textView_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/dark_bg"
+        android:background="@drawable/rounded_corner_small"
+        android:backgroundTint="@color/dark"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:text="Description"
@@ -149,7 +152,7 @@
         app:bsb_show_section_mark="true"
         app:bsb_show_section_text="true"
         app:bsb_show_thumb_text="true"
-        app:bsb_track_color="#B82C2C"
+        app:bsb_track_color="@color/dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_action_desc"
         app:layout_constraintVertical_bias="0.14"
@@ -174,7 +177,8 @@
         android:layout_height="50dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:background="@drawable/rounded_pill_transparent_bg_red_stroke"
+        android:background="@drawable/rounded_corner"
+        android:backgroundTint="@color/dark"
         android:fontFamily="@font/montserrat_light"
         android:hint="None"
         android:maxLines="1"
@@ -189,13 +193,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.729" />
+        app:layout_constraintVertical_bias="0.75" />
 
     <TextView
         android:id="@+id/textView_skill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/dark_bg"
+        android:background="@drawable/rounded_corner_small"
+        android:backgroundTint="@color/dark"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:text="Skill"
@@ -220,8 +225,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_action_desc"
-        app:layout_constraintVertical_bias="0.80000012" />
+        app:layout_constraintTop_toBottomOf="@+id/select_action_skill"
+        app:layout_constraintVertical_bias="0.5" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -167,19 +167,19 @@ class TodoTabsFragment : Fragment() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
-        menuInflater.inflate(R.menu.main_archive_button, menu)
-    }
+//    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+//        menuInflater.inflate(R.menu.main_archive_button, menu)
+//    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.action_archive ->{
-
-            true
-        }
-        else -> {
-            super.onOptionsItemSelected(item)
-        }
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+//        R.id.action_archive ->{
+//
+//            true
+//        }
+//        else -> {
+//            super.onOptionsItemSelected(item)
+//        }
+//    }
 
 
     override fun onDestroyView() {

@@ -9,6 +9,8 @@ import android.transition.Slide
 import android.transition.Transition
 import android.transition.TransitionManager
 import android.view.*
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
@@ -156,18 +158,32 @@ class SkillsFragment : Fragment() {
         binding.btnSave.setOnClickListener {
             if(list_reordered){
                 var c = 0
-                binding.listSkill.visibility = View.GONE
+                var confirm_reorder = false
 
                 for(s in skillList!!){
-                    s.pos = c
+                    if(s.pos != c){
+                        confirm_reorder = true
+                        break
+                    }
                     c++
-                    database.child(path).child(firebaseUser!!.uid).child(s.uid!!).setValue(s).addOnSuccessListener { e ->
+                }
+
+                c = 0
+
+                if(confirm_reorder){
+                    binding.listSkill.visibility = View.GONE
+
+                    for(s in skillList!!){
+                        s.pos = c
+                        c++
+                        database.child(path).child(firebaseUser!!.uid).child(s.uid!!).setValue(s).addOnSuccessListener { e ->
+                        }
                     }
                 }
             }
 
             val transition: Transition = Fade()
-            transition.setDuration(250)
+            transition.setDuration(150)
             transition.addTarget(binding.btnSave)
             TransitionManager.beginDelayedTransition(binding.viewContainer, transition)
 
@@ -207,7 +223,7 @@ class SkillsFragment : Fragment() {
                 transition.addTarget(binding.btnSave)
                 TransitionManager.beginDelayedTransition(binding.viewContainer, transition)
 
-                binding.viewContainer.background = AppCompatResources.getDrawable(binding.root.context, R.color.dark)
+                binding.viewContainer.background = AppCompatResources.getDrawable(binding.root.context, R.color.black)
                 binding.btnSave.visibility = View.VISIBLE
                 touchHelper.attachToRecyclerView(recyclerView)
 

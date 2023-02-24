@@ -70,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0 XP"
-        android:fontFamily="@font/montserrat"
+        android:fontFamily="@font/dotgothic16"
         android:textColor="#B5B5B5"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/progressBar"

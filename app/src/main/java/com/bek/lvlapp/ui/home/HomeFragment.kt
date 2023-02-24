@@ -5,9 +5,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -73,6 +71,7 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         requireActivity().title = "Home"
+        setHasOptionsMenu(true)
 
         val firebaseUser = authManager.firebaseUser
         if (firebaseUser != null) {
@@ -140,9 +139,9 @@ class HomeFragment : Fragment() {
                         .setText("Copied")
                         .setDuration(Style.DURATION_VERY_SHORT)
                         .setFrame(Style.FRAME_KITKAT)
-                        .setColor(PaletteUtils.getSolidColor(PaletteUtils.DARK_GREY))
+                        .setColor(resources.getColor(R.color.dark_50))
                         .setIconResource(R.drawable.ic_icon_copy)
-                        .setHeight(86)
+                        .setHeight(88)
                         .setAnimations(Style.ANIMATIONS_SCALE)
 
                     toast.show()
@@ -217,9 +216,9 @@ class HomeFragment : Fragment() {
         imageSlider.setCustomAnimation(DescriptionAnimation())
         imageSlider.setDuration(10000)
 
-        binding.todoTab.setOnClickListener {
-            findNavController().navigate(R.id.action_nav_home_to_nav_todo)
-        }
+//        binding.todoTab.setOnClickListener {
+//            findNavController().navigate(R.id.action_nav_home_to_nav_todo)
+//        }
 
         return root
     }
@@ -268,6 +267,20 @@ class HomeFragment : Fragment() {
             })
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.main_settings, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.action_settings ->{
+            findNavController().navigate(R.id.action_nav_home_to_settingsFragment)
+            true
+        }
+
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
+    }
     override fun onResume() {
         super.onResume()
     }

@@ -67,7 +67,6 @@ class TodoFragment(var list_type: String = "All") : Fragment() {
         _binding = FragmentTodoBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        setHasOptionsMenu(true)
 
         val firebaseUser = authManager.firebaseUser
         if (firebaseUser != null) {
@@ -122,14 +121,14 @@ class TodoFragment(var list_type: String = "All") : Fragment() {
                                     }
                                 }
 
-                                ItemTouchHelper.RIGHT -> {
-                                    var arch_todo = todoList!!.get(viewHolder.layoutPosition)
-                                    arch_todo.archived = true
-                                    database.child(path).child(firebaseUser!!.uid).child(todoList!!.get(viewHolder.layoutPosition).uid!!).setValue(arch_todo).addOnSuccessListener { e->
-                                    }.addOnFailureListener{ e->
-                                        Toast.makeText(binding.root.context, "Unable to archive todo: $e", Toast.LENGTH_SHORT).show()
-                                    }
-                                }
+//                                ItemTouchHelper.RIGHT -> {
+//                                    var arch_todo = todoList!!.get(viewHolder.layoutPosition)
+//                                    arch_todo.archived = true
+//                                    database.child(path).child(firebaseUser!!.uid).child(todoList!!.get(viewHolder.layoutPosition).uid!!).setValue(arch_todo).addOnSuccessListener { e->
+//                                    }.addOnFailureListener{ e->
+//                                        Toast.makeText(binding.root.context, "Unable to archive todo: $e", Toast.LENGTH_SHORT).show()
+//                                    }
+//                                }
                             }
                         }
                     }

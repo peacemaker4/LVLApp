@@ -84,41 +84,41 @@
                 app:layout_constraintVertical_bias="0.5" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:id="@+id/todo_tab"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@drawable/rounded_corner"
-        android:foreground="@drawable/custom_ripple"
-        android:backgroundTint="@color/dark"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.86" >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textAllCaps="false"
-            android:text="To-do"
-            android:drawableTint="@color/red"
-            android:textColor="@color/red"
-            android:drawableRight="@drawable/ic_menu_task"
-            android:textAlignment="center"
-            android:paddingRight="35dp"
-            android:paddingLeft="55dp"
-            android:fontFamily="@font/montserrat_light"
-            android:textSize="18dp"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-    </LinearLayout>
+<!--    <LinearLayout-->
+<!--        android:id="@+id/todo_tab"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="45dp"-->
+<!--        android:background="@drawable/rounded_corner"-->
+<!--        android:foreground="@drawable/custom_ripple"-->
+<!--        android:backgroundTint="@color/dark"-->
+<!--        android:layout_marginRight="5dp"-->
+<!--        android:layout_marginLeft="5dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.86" >-->
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:text="To-do"-->
+<!--            android:drawableTint="@color/red"-->
+<!--            android:textColor="@color/red"-->
+<!--            android:drawableRight="@drawable/ic_menu_task"-->
+<!--            android:textAlignment="center"-->
+<!--            android:paddingRight="35dp"-->
+<!--            android:paddingLeft="55dp"-->
+<!--            android:fontFamily="@font/montserrat_light"-->
+<!--            android:textSize="18dp"-->
+<!--            android:gravity="center"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            />-->
+<!--    </LinearLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -31,14 +31,6 @@
 
         </ListPreference>
 
-
-        <EditTextPreference
-            app:key="@string/pref_web_page"
-            app:title="@string/web_title"
-            app:useSimpleSummaryProvider="true"
-            android:defaultValue="@string/def_web_page"
-            />
-
     </PreferenceCategory>
 
 

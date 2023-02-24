@@ -7,6 +7,11 @@
         android:icon="@drawable/ic_icon_home"/>
 
     <item
+        android:id="@+id/item1"
+        android:title="@string/menu_todo"
+        android:icon="@drawable/ic_menu_task"/>
+
+    <item
         android:id="@+id/item2"
         android:title="@string/menu_skills"
         android:icon="@drawable/ic_icon_bar_chart"/>
@@ -16,9 +21,5 @@
         android:title="@string/menu_actions"
         android:icon="@drawable/ic_icon_stars"/>
 
-    <item
-        android:id="@+id/item4"
-        android:title="@string/menu_profile"
-        android:icon="@drawable/ic_icon_face"/>
 
 </menu>

@@ -33,6 +33,8 @@
         app:itemFontFamily="@font/montserrat_light"
         app:textColor="@color/light_gray"
         app:indicatorColor="@color/dark_50"
+        app:indicatorRadius="10dp"
+        app:duration="800"
         app:iconSize="20dp"
         app:menu="@menu/menu"/>
 

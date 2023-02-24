@@ -12,12 +12,22 @@
     >
 
     <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Delete"
+        android:textColor="@color/white"
+        android:layout_marginBottom="10dp"
+        android:textSize="16sp"/>
+
+    <TextView
         android:id="@+id/confirm_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat"
+        android:fontFamily="@font/montserrat_light"
         android:text="Are you sure about that?"
-        android:textColor="@color/white"
+        android:textColor="#CCCCCC"
         android:layout_marginBottom="10dp"
         android:textSize="16sp"/>
 
@@ -29,7 +39,9 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="NO"
-            android:background="@drawable/rounded_pill"
+            android:background="@color/transparent"
+            android:foreground="@drawable/custom_ripple"
+            android:textColor="@color/light_gray"
             android:layout_marginRight="15dp"
             />
 
@@ -38,7 +50,10 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="YES"
-            android:background="@drawable/rounded_pill" />
+            android:background="@color/transparent"
+            android:foreground="@drawable/custom_ripple"
+            android:textColor="@color/red"
+            />
     </LinearLayout>
 
 

@@ -171,19 +171,22 @@ class SkillActivity(bcontext: Context? = null) : AppCompatActivity() {
             this.overridePendingTransition(R.anim.fade_in, R.anim.no_animation)
         }
         else if(item.itemId == R.id.action_delete){
-            deleteConfirm("Are you sure you want to delete?")
+            deleteConfirm("Delete","Are you sure you want to delete?")
         }
 
         return super.onOptionsItemSelected(item)
     }
 
-    private fun deleteConfirm(text: String){
+    private fun deleteConfirm(title: String, text: String){
         dialogBuilder = AlertDialog.Builder(binding.root.context)
         var popupView = layoutInflater.inflate(R.layout.confirm_popup, null)
 
+        val titletext = popupView.findViewById<TextView>(R.id.title_text)
         val noBtn = popupView.findViewById<TextView>(R.id.noBtn)
         val yesBtn = popupView.findViewById<TextView>(R.id.yesBtn)
         val confirmtext = popupView.findViewById<TextView>(R.id.confirm_text)
+        yesBtn.setTextColor(resources.getColor(R.color.red))
+        titletext.text = title
         confirmtext.text = text
 
         dialogBuilder.setView(popupView)
@@ -191,7 +194,7 @@ class SkillActivity(bcontext: Context? = null) : AppCompatActivity() {
         dialog.show()
         val window: Window? = dialog.window
         if (window != null) {
-            window.attributes.windowAnimations = R.style.FadeDialogAnimation
+            window.attributes.windowAnimations = R.style.ScaleDialogAnimation
             window.setLayout(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT)
             noBtn.setOnClickListener{
                 dialog.cancel()

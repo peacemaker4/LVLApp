@@ -43,6 +43,7 @@ class SkillAdapter (private val mContext: Context, private val mArrayList: Array
         holder.xp.text = currentSkill.xp.toString() + " XP"
         holder.progress.progress = LevelCalculator.LevelProgress(currentSkill.xp!!)
         holder.progress.progressTintList = ColorStateList.valueOf(currentSkill.color!!)
+        holder.border.backgroundTintList = ColorStateList.valueOf(currentSkill.color!!)
 
         holder.itemView.setOnClickListener{
             onItemClick?.invoke(currentSkill)
@@ -60,6 +61,7 @@ class SkillAdapter (private val mContext: Context, private val mArrayList: Array
         val level: TextView
         val xp: TextView
         val progress: ProgressBar
+        val border: LinearLayout
 
         init {
             name =  itemView.findViewById(R.id.name_id)
@@ -67,6 +69,7 @@ class SkillAdapter (private val mContext: Context, private val mArrayList: Array
             level =  itemView.findViewById(R.id.level_id)
             xp =  itemView.findViewById(R.id.xp_id)
             progress =  itemView.findViewById(R.id.progress_id)
+            border =  itemView.findViewById(R.id.skill_layout_border)
         }
 
     }

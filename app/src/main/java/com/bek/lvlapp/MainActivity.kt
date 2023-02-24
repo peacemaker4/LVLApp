@@ -29,7 +29,6 @@ import me.ibrahimsn.lib.SmoothBottomBar
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var firebaseAuth: FirebaseAuth
@@ -39,9 +38,9 @@ class MainActivity : AppCompatActivity() {
 
     private var menu_list: ArrayList<Int> = arrayListOf<Int>(
         R.id.nav_home,
+        R.id.nav_todo,
         R.id.nav_skills,
         R.id.nav_actions,
-        R.id.nav_profile,
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.nav_host_fragment_content_main)
 
         setupSmoothBottomMenu()
+
 //        setupActionBarWithNavController(navController)
 
         navView.itemTextColor = resources.getColor(R.color.red)
@@ -80,11 +80,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        menuInflater.inflate(R.menu.menu, menu)
-//        return true
-//    }
 
 //    override fun onSupportNavigateUp(): Boolean {
 //        val navController = findNavController(R.id.nav_host_fragment_content_main)

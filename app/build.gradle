@@ -49,6 +49,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
     implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
     implementation 'androidx.databinding:baseLibrary:3.2.0-alpha11'
     implementation 'androidx.preference:preference:1.2.0'
@@ -109,4 +110,12 @@ dependencies {
 
     //Smooth Navigation Bar
     implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.9'
+
+    //Calendar view
+    implementation 'com.kizitonwose.calendar:view:2.1.1'
+
+    implementation 'com.kizitonwose.calendar:compose:2.1.1'
+
+    //Charts
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

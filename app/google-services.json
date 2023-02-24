@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "137328097474",
+    "firebase_url": "https://lvlapp-ff610-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "lvlapp-ff610",
     "storage_bucket": "lvlapp-ff610.appspot.com"
   },
@@ -14,7 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "137328097474-mu3q4ti31cog9v8gksiv37bq4fa6pl74.apps.googleusercontent.com",
+          "client_id": "137328097474-3ink4dlnhsdqqpvt7knb8mgace8r1i62.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,7 +28,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "137328097474-mu3q4ti31cog9v8gksiv37bq4fa6pl74.apps.googleusercontent.com",
+              "client_id": "137328097474-3ink4dlnhsdqqpvt7knb8mgace8r1i62.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

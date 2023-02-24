@@ -235,10 +235,10 @@ class SkillsAddActivity : AppCompatActivity() {
         super.onBackPressed()
         val extras = intent.extras
         if(extras != null){
-            overridePendingTransition(R.anim.no_animation, R.anim.fade_out);
+            overridePendingTransition(R.anim.no_animation, R.anim.fade_out)
         }
         else{
-            overridePendingTransition(R.anim.no_animation, R.anim.slide_down);
+            overridePendingTransition(R.anim.no_animation, R.anim.slide_down)
         }
     }
 

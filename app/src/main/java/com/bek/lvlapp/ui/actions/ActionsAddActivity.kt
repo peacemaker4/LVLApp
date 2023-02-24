@@ -36,6 +36,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
 import com.madrapps.pikolo.HSLColorPicker
 import com.madrapps.pikolo.listeners.SimpleColorSelectionListener
 import com.xw.repo.BubbleSeekBar
@@ -73,8 +74,9 @@ class ActionsAddActivity : AppCompatActivity() {
     private lateinit var editActionDesc: EditText
     private lateinit var editActionSkill: EditText
     private lateinit var bubbleSeekBarXpGive: BubbleSeekBar
+    private lateinit var bg_imageView: ImageView
 
-    private var new_action_text = ""
+    private var edit_action_text = ""
     private var description = ""
 
     private lateinit var iconList: ArrayList<Icon>
@@ -84,14 +86,14 @@ class ActionsAddActivity : AppCompatActivity() {
     private var skillList: java.util.ArrayList<Skill>? = null
     private var selected_skill: Skill? = null
 
+    private var currentAction: Action? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityActionsAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         actionBar = supportActionBar!!
-        actionBar.title = "Actions Add"
-        actionBar.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.dark_prime)))
         actionBar.setDisplayHomeAsUpEnabled(true)
         actionBar.setDisplayShowHomeEnabled(true)
 
@@ -100,8 +102,18 @@ class ActionsAddActivity : AppCompatActivity() {
         if (firebaseUser != null) {
             database = Firebase.database(url).reference
         }
+        var colorPicker: HSLColorPicker = findViewById(R.id.colorPicker);
+        iconList = IconsManager.GetAllIcons()
+
+        imageIcon = findViewById(R.id.imageSkill)
+        editActionName = findViewById(R.id.edit_action_name)
+        editActionDesc = findViewById(R.id.edit_action_desc)
+        bubbleSeekBarXpGive = findViewById(R.id.bubbleSeekBar)
+        editActionSkill = findViewById(R.id.select_action_skill)
+        bg_imageView = findViewById(R.id.imageBg)
 
         skillList = java.util.ArrayList()
+
 
         val skillListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -118,6 +130,19 @@ class ActionsAddActivity : AppCompatActivity() {
                     skillSelectAdapter = SkillSelectAdapter(binding.root.context, skillList!!)
                     skillSelectAdapter!!.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.ALLOW
 
+                    val extras = intent.extras
+                    if(extras != null){
+                        for(s in skillList!!){
+                            if(s.uid == currentAction!!.skill_uid){
+                                selected_skill = s
+                            }
+                        }
+                        editActionSkill.setText(selected_skill!!.name)
+                        editActionSkill.setCompoundDrawablesWithIntrinsicBounds(resources.getIdentifier(selected_skill!!.icon, "drawable",
+                            this@ActionsAddActivity.packageName), 0, 0, 0)
+                        editActionSkill.setTextColor(selected_skill!!.color!!.toInt())
+                        editActionSkill.compoundDrawableTintList = ColorStateList.valueOf(selected_skill!!.color!!)
+                    }
                 }
             }
 
@@ -126,21 +151,38 @@ class ActionsAddActivity : AppCompatActivity() {
         }
         database.child(skills_path).child(firebaseUser!!.uid).addValueEventListener(skillListener)
 
-        var colorPicker: HSLColorPicker = findViewById(R.id.colorPicker);
-        iconList = IconsManager.GetAllIcons()
 
-        currIcon = resources.getResourceEntryName(iconList?.get(0)?.icon!!)
 
-        imageIcon = findViewById(R.id.imageSkill)
-        var bg_imageView: ImageView = findViewById(R.id.imageBg)
-        var imageView: ImageView = findViewById(R.id.imageSkill)
+        val extras = intent.extras
+        if(extras != null){
+            actionBar.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.dark_bg)))
+
+            currentAction = Gson().fromJson(extras.getString("action"), Action::class.java)
+
+            editActionName.setText(currentAction!!.name.toString())
+            actionBar.title = "Action: " + currentAction!!.name + "*"
+            currColor = currentAction!!.color!!
+            currIcon = currentAction!!.icon!!
+            imageIcon?.setBackgroundResource(resources.getIdentifier(currIcon, "drawable", "com.bek.lvlapp"))
+            imageIcon.background.setColorFilter(currColor, PorterDuff.Mode.MULTIPLY)
+            editActionDesc.setText(currentAction!!.description)
+            colorPicker.setColor(currColor)
+            bubbleSeekBarXpGive.setProgress(currentAction!!.xp_give!!.toFloat())
+            bg_imageView.background.setColorFilter(currColor, PorterDuff.Mode.MULTIPLY)
+
+        }
+        else{
+            actionBar.title = "Actions Add"
+            actionBar.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.dark_prime)))
+            currIcon = resources.getResourceEntryName(iconList?.get(0)?.icon!!)
+        }
 
         colorPicker.setColorSelectionListener(object : SimpleColorSelectionListener() {
             override fun onColorSelected(color: Int) {
                 // Do whatever you want with the color
                 currColor = color
                 bg_imageView.background.setColorFilter(color, PorterDuff.Mode.MULTIPLY)
-                imageView.background.setColorFilter(color, PorterDuff.Mode.MULTIPLY)
+                imageIcon.background.setColorFilter(color, PorterDuff.Mode.MULTIPLY)
             }
         })
 
@@ -150,10 +192,6 @@ class ActionsAddActivity : AppCompatActivity() {
             iconPicker()
         }
 
-        editActionName = findViewById(R.id.edit_action_name)
-        editActionDesc = findViewById(R.id.edit_action_desc)
-        bubbleSeekBarXpGive = findViewById(R.id.bubbleSeekBar)
-
         var btn_anim: Animation = AnimationUtils.loadAnimation(binding.root.context, R.anim.bounce)
         val btnSave : Button = findViewById(R.id.save_button)
         btnSave.setOnClickListener {
@@ -161,7 +199,6 @@ class ActionsAddActivity : AppCompatActivity() {
             validateData()
         }
 
-        editActionSkill = findViewById(R.id.select_action_skill)
 
         editActionSkill.setOnClickListener{
             skillPicker()
@@ -237,10 +274,10 @@ class ActionsAddActivity : AppCompatActivity() {
     }
 
     private fun validateData(){
-        new_action_text = editActionName.text.toString().trim()
+        edit_action_text = editActionName.text.toString().trim()
         description = editActionDesc.text.toString().trim()
 
-        if(TextUtils.isEmpty(new_action_text)){
+        if(TextUtils.isEmpty(edit_action_text)){
         }
         else{
             AddAction()
@@ -249,27 +286,55 @@ class ActionsAddActivity : AppCompatActivity() {
 
     private fun AddAction(){
         val firebaseUser = authManager.firebaseUser
+        if(currentAction == null){
+            database.child(path).child(firebaseUser!!.uid).get().addOnSuccessListener {
+                val new_action = Action(edit_action_text, description, currIcon, currColor)
+                new_action.xp_give = bubbleSeekBarXpGive.progress
+                new_action.pos = it.childrenCount.toInt()
+                new_action.skill_uid = selected_skill!!.uid
+                new_action.created_at = LocalDateTime.now().toString()
+                new_action.updated_at = LocalDateTime.now().toString()
 
-        database.child(path).child(firebaseUser!!.uid).get().addOnSuccessListener {
-            val new_action = Action(new_action_text, description, currIcon, currColor)
-            new_action.xp_give = bubbleSeekBarXpGive.progress
-            new_action.pos = it.childrenCount.toInt()
-            new_action.skill_uid = selected_skill!!.uid
-            new_action.created_at = LocalDateTime.now().toString()
-            new_action.updated_at = LocalDateTime.now().toString()
+                database.child(path).child(firebaseUser!!.uid).push().setValue(new_action).addOnSuccessListener { e->
+                    onBackPressed()
+                }.addOnFailureListener{ e->
+                    Toast.makeText(binding.root.context, "Error while adding the action: $e", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+        else{
+            val upd_skill = currentAction
+            upd_skill?.updated_at = LocalDateTime.now().toString()
+            upd_skill?.name = edit_action_text
+            upd_skill?.description = description
+            upd_skill?.skill_uid = selected_skill!!.uid
+            upd_skill?.xp_give = bubbleSeekBarXpGive.progress
+            upd_skill?.color = currColor
+            upd_skill?.icon = currIcon
 
-            database.child(path).child(firebaseUser!!.uid).push().setValue(new_action).addOnSuccessListener { e->
+            database.child(path).child(firebaseUser!!.uid).child(upd_skill?.uid!!).setValue(upd_skill).addOnSuccessListener { e->
                 onBackPressed()
             }.addOnFailureListener{ e->
-                Toast.makeText(binding.root.context, "Error while adding the action: $e", Toast.LENGTH_LONG).show()
+                Toast.makeText(binding.root.context, "Error while saving the skill: $e", Toast.LENGTH_LONG).show()
             }
         }
 
+
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val extras = intent.extras
+        if(extras != null){
+            overridePendingTransition(R.anim.no_animation, R.anim.fade_out)
+        }
+        else{
+            overridePendingTransition(R.anim.no_animation, R.anim.slide_down)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
-        overridePendingTransition(R.anim.no_animation, R.anim.slide_down);
         return super.onSupportNavigateUp()
     }
 }

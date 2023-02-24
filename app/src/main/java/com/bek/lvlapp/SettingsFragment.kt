@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
 import com.bek.lvlapp.databinding.FragmentSkillsBinding
 import com.bek.lvlapp.helpers.AuthManager
@@ -46,5 +47,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        requireActivity().title = "Settings"
     }
 }
