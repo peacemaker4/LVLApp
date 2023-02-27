@@ -56,21 +56,42 @@
                     android:paddingLeft="15dp"
                     android:paddingTop="15dp"
                     android:paddingRight="15dp"
-                    android:text=""
+                    android:text="asokfsaofkaspofkasofpopsakfpkapfkasopkfsapsakfasoppsao"
                     android:textColor="@color/white" />
 
-                <TextView
-                    android:id="@+id/timeText"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginStart="178dp"
-                    android:fontFamily="@font/montserrat_light"
-                    android:paddingRight="7dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
                     android:paddingBottom="5dp"
-                    android:text=""
-                    android:textColor="#A3A3A3"
-                    android:textSize="12sp" />
+                    android:gravity="end"
+                    >
+                    <ImageButton
+                        android:id="@+id/like_quote_btn"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:scaleType="fitEnd"
+                        android:background="@drawable/ic_icon_heart_outline"
+                        android:backgroundTint="@color/light_gray"
+                        android:layout_gravity="bottom"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginBottom="1dp"
+                        />
+                    <TextView
+                        android:id="@+id/timeText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:gravity="end"
+                        android:fontFamily="@font/montserrat_light"
+                        android:paddingRight="7dp"
+                        android:paddingTop="5dp"
+                        android:text="20:00"
+                        android:textColor="#A3A3A3"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <com.victor.loading.newton.NewtonCradleLoading

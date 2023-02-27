@@ -3,9 +3,14 @@ package com.bek.lvlapp.ui.home
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
 import android.view.*
+import android.view.GestureDetector.SimpleOnGestureListener
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -20,6 +25,7 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.bek.lvlapp.R
 import com.bek.lvlapp.databinding.FragmentHomeBinding
 import com.bek.lvlapp.helpers.AuthManager
+import com.bek.lvlapp.helpers.DoubleClickListener
 import com.bek.lvlapp.models.Quote
 import com.daimajia.slider.library.Animations.DescriptionAnimation
 import com.daimajia.slider.library.SliderLayout
@@ -40,7 +46,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment()  {
 
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
@@ -53,11 +59,14 @@ class HomeFragment : Fragment() {
 
     private lateinit var quote_1: Quote
     private lateinit var quote_1_textView: TextView
+    private lateinit var likeQuoteBtn: ImageButton
 
     //Firebase db
     lateinit var database: DatabaseReference
     private val url = "https://lvlapp-ff610-default-rtdb.europe-west1.firebasedatabase.app"
     private val path = "quotes"
+
+    private var quote_liked = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -127,7 +136,8 @@ class HomeFragment : Fragment() {
             }
         }
         database.child(path).child(firebaseUser!!.uid).addValueEventListener(quoteListener)
-            quote_1_textView.setOnLongClickListener {
+
+        quote_1_textView.setOnLongClickListener {
                 if(quote_1_textView.text.isNotEmpty()){
 
                     val clipboard: ClipboardManager? =
@@ -220,7 +230,37 @@ class HomeFragment : Fragment() {
 //            findNavController().navigate(R.id.action_nav_home_to_nav_todo)
 //        }
 
+        likeQuoteBtn = binding.likeQuoteBtn
+
+        var btn_anim: Animation = AnimationUtils.loadAnimation(binding.root.context, R.anim.bounce)
+        likeQuoteBtn.setOnClickListener{
+            likeQuoteBtn.startAnimation(btn_anim)
+            quoteLike()
+        }
+
+        quote_1_textView.setOnClickListener(object: DoubleClickListener(){
+            override fun onDoubleClick(v: View?) {
+                likeQuoteBtn.startAnimation(btn_anim)
+                quoteLike()
+            }
+
+        })
         return root
+    }
+
+
+
+    private fun quoteLike(){
+        if(!quote_liked){
+            likeQuoteBtn.setBackgroundResource(R.drawable.ic_icon_heart)
+            likeQuoteBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.main))
+            quote_liked = true
+        }
+        else{
+            likeQuoteBtn.setBackgroundResource(R.drawable.ic_icon_heart_outline)
+            likeQuoteBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.light_gray))
+            quote_liked = false
+        }
     }
 
     private fun getQuote(){
@@ -289,4 +329,6 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }

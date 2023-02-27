@@ -4,33 +4,28 @@ import android.app.ActionBar
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.transition.Fade
 import android.transition.Slide
 import android.transition.Transition
 import android.transition.TransitionManager
-import android.util.Log
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bek.lvlapp.R
-import com.bek.lvlapp.WelcomeActivity
 import com.bek.lvlapp.databinding.ActivityActionBinding
-import com.bek.lvlapp.databinding.ActivitySkillBinding
 import com.bek.lvlapp.helpers.AuthManager
-import com.bek.lvlapp.helpers.LevelCalculator
 import com.bek.lvlapp.models.Action
 import com.bek.lvlapp.models.Skill
 import com.bek.lvlapp.models.SkillAction
-import com.github.johnpersano.supertoasts.library.Style
-import com.github.johnpersano.supertoasts.library.SuperActivityToast
-import com.github.johnpersano.supertoasts.library.utils.PaletteUtils
-import com.google.firebase.auth.FirebaseAuth
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -39,9 +34,8 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
-import com.kizitonwose.calendar.compose.HeatMapCalendar
-import com.victor.loading.rotate.RotateLoading
-import java.util.ArrayList
+import java.time.LocalDateTime
+
 
 class ActionActivity(bcontext: Context? = null) : AppCompatActivity() {
 
@@ -155,14 +149,56 @@ class ActionActivity(bcontext: Context? = null) : AppCompatActivity() {
         }
         database.child(path).child(firebaseUser!!.uid).child(action_uid).addValueEventListener(actionListener)
 
+        var chart = binding.actionChart
+
+        //chart
+        chart.setDrawBarShadow(false);
+        chart.setDrawValueAboveBar(true);
+        chart.getDescription().setEnabled(false);
+        // if more than 60 entries are displayed in the chart, no values will be
+        // drawn
+        chart.setMaxVisibleValueCount(60);
+        // scaling can now only be done on x- and y-axis separately
+        chart.setPinchZoom(false);
+        chart.setDrawGridBackground(false);
+        var l = chart.getLegend();
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        l.setDrawInside(false);
+        l.setForm(Legend.LegendForm.LINE);
+        l.setFormSize(4f);
+        l.setTextSize(11f);
+        l.setXEntrySpace(4f);
+
 
         skillActionListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 skillActionList = ArrayList()
 
+                val values = ArrayList<BarEntry>()
+                val days = ArrayList<String>()
+
                 for (s in dataSnapshot.children) {
                     var skilAction = s.getValue<SkillAction>()!!
                     skillActionList!!.add(skilAction)
+                }
+
+                if(skillActionList!!.isNotEmpty()){
+                    var c = 0
+                    for(s in skillActionList!!){
+                        val day = LocalDateTime.parse(s.created_at).dayOfWeek
+                        val value = s.xp_give
+                        values.add(BarEntry(value!!.toFloat(), c.toFloat()))
+                        days.add(day.toString())
+                        c++
+                    }
+
+                    val bardataset = BarDataSet(values, "XP")
+                    chart.animateY(5000)
+                    val data = BarData(bardataset)
+                    bardataset.setColors(*ColorTemplate.COLORFUL_COLORS)
+                    chart.data = data
                 }
 
             }

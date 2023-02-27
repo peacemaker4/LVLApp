@@ -65,12 +65,12 @@ class WelcomeActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
         }
 
-        createGoogleRequest()
+//        createGoogleRequest()
         database = Firebase.database(url).reference
 
-        binding.btnGoogle.setOnClickListener{
-            signInGoogle()
-        }
+//        binding.btnGoogle.setOnClickListener{
+//            signInGoogle()
+//        }
 
     }
 
